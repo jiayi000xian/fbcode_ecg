@@ -1,0 +1,38 @@
+{
+    "args":{
+        "data_path": "manifold://fast_content_understanding/tree/ecg/data-bin/debug",
+        "test_file": "test",
+        "train_file": "train",
+        "valid_file": "valid",
+        "label_order": "random",
+        "read_per_line": true,
+        "model_name_or_path": "manifold://fast_content_understanding/tree/ecg/model/t5_small",
+        "from_checkpoint": "",
+        "model_save_name": "",
+        "checkpoint_upload_interval": 1,
+        "output_upload_interval": 1,
+        "device": "cuda",
+        "max_i_length": 256,
+        "max_o_length": 128,
+        "replace_underscores": true,
+        "data_parallel": true,
+        "use_proxy": false,
+        "train_batch_size": 2,
+        "eval_batch_size": 2,
+        "eval_every_k_epoch": 5,
+        "backward_freq": 1,
+        "print_freq": 20,
+        "learning_rate": 2e-4,
+        "num_epochs": 2,
+        "decode_beams": 32,
+        "use_multisoftmax": true,
+        "checkpoint_save_option": "best",
+        "decode_on_lattice": false,
+        "output_dir": "evaluation",
+        "num_thresholds": 3,
+        "min_support": 0,
+        "get_curve": "curve_only",
+        "show_examples": true
+    }
+
+}

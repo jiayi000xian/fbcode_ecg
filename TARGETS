@@ -1,0 +1,54 @@
+load("@fbcode_macros//build_defs:python_binary.bzl", "python_binary")
+load("@fbcode_macros//build_defs:python_library.bzl", "python_library")
+load("//fblearner/flow/projects:macros.bzl", "fblearner_flow_project_python_binary")
+#load("@fbcode_macros//build_defs:python_unittest.bzl", "python_unittest")
+
+python_library(
+    name = "ecg_train_lib",
+    srcs = [
+        "common.py",
+        "data_utils.py",
+        "decode_utils.py",
+        "finetune_s2s.py",
+        "local_configs.py",
+        "params.py",
+        "s2s_model.py",
+        "utils.py",
+    ],
+    deps = [
+        "fbsource//third-party/pypi/tqdm:tqdm",
+        "fbsource//third-party/pypi/transformers:transformers",
+        "//aiplatform/modelstore/manifold:manifold_utils",
+        "//caffe2:torch",
+        "//fair_infra/data/iopath/iopath:core",
+        "//fblearner/flow:api",
+        "//libfb/py:parutil",
+        "//libfb/py/mkl:mkl",  # @manual
+    ],
+)
+
+fblearner_flow_project_python_binary(
+    name = "workflow",
+    deps = [
+        ":ecg_train_lib",
+    ],
+)
+
+python_binary(
+    name = "finetune_s2s",
+    srcs = [
+        "common.py",
+        "data_utils.py",
+        "decode_utils.py",
+        "finetune_s2s.py",
+        "local_configs.py",
+        "params.py",
+        "s2s_model.py",
+        "utils.py",
+    ],
+    main_module = "fblearner.flow.projects.ecg.finetune_s2s",
+    deps = [
+        ":ecg_train_lib",
+        "//libfb/py:parutil",
+    ],
+)
