@@ -208,16 +208,16 @@ def save_preds_and_golds(preds_by_method, golds, EcgHelper, args):
         method_str = method + ("_lattice" if args.decode_on_lattice else "")
         preds_file = os.path.join(
             EcgHelper.local_dir, f"test_preds_{method_str}.jsonl"
-        )
+        ) 
 
         with open(preds_file, "w") as outfile:
-            for _, pred in preds:
+            for _, pred in preds: # TODO: "sample_id": xxxx, "preds": xxxxx
                 outfile.write(json.dumps({"output": pred}) + "\n")
 
     golds_file = os.path.join(EcgHelper.local_dir, "test_golds.json")
 
     with open(golds_file, "w") as outfile:
-        json.dump(golds, outfile)
+        json.dump(golds, outfile) # TODO: "sample_id": xxxx, "golds": xxxxx
 
 
 def metrics_post_processing(preds_by_method, golds, EcgHelper, args, get_curve: str = "all"):
